@@ -14,6 +14,8 @@ Grab text from anywhere on screen, turn phone photos into clean printable pages,
 ![Offline](https://img.shields.io/badge/OCR-100%25%20offline-15803d)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
+**[⬇ Download for Windows](https://github.com/dimuthun/Scanvas/releases/latest)**
+
 <img src="docs/screenshots/library-light.png" width="860" alt="Scanvas library with folders, tags and scanned documents (Light theme)" />
 
 </div>
@@ -103,7 +105,7 @@ Grab text from anywhere on screen, turn phone photos into clean printable pages,
 ## Install
 
 ### Windows
-1. Download `Scanvas-Setup-<version>.exe` from **Releases**, or build it yourself (see [Building installers](#building-installers)).
+1. **[⬇ Download Scanvas-Setup-0.1.0.exe](https://github.com/dimuthun/Scanvas/releases/download/v0.1.0/Scanvas-Setup-0.1.0.exe)** (155 MB, Windows 10/11 x64) from the [latest release](https://github.com/dimuthun/Scanvas/releases/latest), or build it yourself (see [Building installers](#building-installers)).
 2. Run the installer. Scanvas installs for the current user, so no admin rights are needed. It adds:
    - a **desktop shortcut**,
    - a **Start Menu** entry,
