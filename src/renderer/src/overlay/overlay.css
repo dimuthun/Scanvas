@@ -1,0 +1,214 @@
+body {
+  background: #000;
+  background-image: none;
+  overflow: hidden;
+  user-select: none;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  cursor: crosshair;
+}
+
+.screenshot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Dim the whole frozen screen until a selection exists. */
+.overlay.empty::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.hint {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(20, 22, 28, 0.72);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  pointer-events: none;
+  animation: rise-in 0.3s var(--ease);
+}
+
+.hint svg {
+  width: 15px;
+  height: 15px;
+  color: var(--accent);
+}
+
+/* The huge spread shadow dims everything outside the selection. */
+.selection {
+  position: absolute;
+  outline: 2px solid var(--accent);
+  box-shadow:
+    0 0 0 200vmax rgba(0, 0, 0, 0.5),
+    0 0 24px 2px var(--accent-soft);
+  cursor: move;
+}
+
+.selection.dragging {
+  outline-style: dashed;
+}
+
+.size-label {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font: 600 12px/18px 'Cascadia Code', Consolas, monospace;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.handle {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  margin: -6px 0 0 -6px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.12s var(--ease);
+}
+
+.handle:hover {
+  transform: scale(1.35);
+}
+
+.handle.nw { left: 0; top: 0; cursor: nwse-resize; }
+.handle.n { left: 50%; top: 0; cursor: ns-resize; }
+.handle.ne { left: 100%; top: 0; cursor: nesw-resize; }
+.handle.e { left: 100%; top: 50%; cursor: ew-resize; }
+.handle.se { left: 100%; top: 100%; cursor: nwse-resize; }
+.handle.s { left: 50%; top: 100%; cursor: ns-resize; }
+.handle.sw { left: 0; top: 100%; cursor: nesw-resize; }
+.handle.w { left: 0; top: 50%; cursor: ew-resize; }
+
+.toolbar {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  cursor: default;
+  animation: pop-in 0.18s var(--ease);
+}
+
+.toolbar .tool {
+  flex: 1;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text);
+}
+
+.toolbar .tool svg {
+  width: 18px;
+  height: 18px;
+}
+
+.toolbar .tool:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.toolbar .tool.cancel {
+  color: var(--danger);
+}
+
+.toolbar .tool.confirm {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.toolbar .tool.confirm:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+/* Tooltips above the toolbar so they never cover the selection. */
+.toolbar [data-tooltip]:hover::after {
+  top: auto;
+  bottom: calc(100% + 10px);
+}
+
+.loupe {
+  position: absolute;
+  z-index: 4;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  background: rgba(15, 17, 22, 0.88);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.loupe canvas {
+  display: block;
+}
+
+.loupe-cross {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 132px;
+  height: 132px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) center / 1px 100% no-repeat,
+    linear-gradient(var(--accent), var(--accent)) center / 100% 1px no-repeat;
+  opacity: 0.7;
+}
+
+.loupe-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 5px 8px;
+  color: #e5e7eb;
+  font: 600 11px/14px 'Cascadia Code', Consolas, monospace;
+}
+
+.loupe-info .color {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.loupe-info .color i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}

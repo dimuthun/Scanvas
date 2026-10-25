@@ -1,0 +1,7 @@
+node_modules/
+out/
+dist/
+resources/tessdata/
+*.log
+src/renderer/public/pdfjs/
+*.tsbuildinfo

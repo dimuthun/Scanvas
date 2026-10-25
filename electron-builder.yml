@@ -1,0 +1,74 @@
+appId: com.scanvas.app
+productName: Scanvas
+copyright: Copyright © 2026 Scanvas
+
+directories:
+  output: dist
+
+files:
+  - out/**/*
+  - package.json
+
+# Not packed into app.asar: the OpenCV and Tesseract worker threads load
+# their scripts and WebAssembly from disk, which is unreliable inside an archive.
+asar: false
+
+extraResources:
+  - from: resources/tessdata
+    to: tessdata
+  - from: resources/icons
+    to: icons
+  - from: resources/scripts
+    to: scripts
+
+electronFuses:
+  runAsNode: false
+  enableCookieEncryption: true
+  enableNodeOptionsEnvironmentVariable: false
+  enableNodeCliInspectArguments: false
+  # Pages are served from the scanvas:// scheme, never file://.
+  grantFileProtocolExtraPrivileges: false
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: build/icon.ico
+
+nsis:
+  # Per-user install like the original CamScanner desktop app (no admin rights needed).
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  artifactName: Scanvas-Setup-${version}.${ext}
+  # Desktop icon + Start Menu entry; the installer also registers Scanvas in
+  # Settings → Apps (Apps & features / Programs and Features) with an uninstaller.
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: Scanvas
+  uninstallDisplayName: Scanvas
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  runAfterFinish: true
+  deleteAppDataOnUninstall: false
+
+mac:
+  target: dmg
+  icon: resources/icons/icon.png
+  category: public.app-category.productivity
+  extendInfo:
+    NSScreenCaptureUsageDescription: Scanvas captures the screen region you select to recognize its text.
+
+linux:
+  target: AppImage
+  icon: resources/icons/icon.png
+  category: Office
+
+# Auto-update feed (electron-updater). Uncomment and set your GitHub repository, then publish
+# releases with: npx electron-builder --win --publish always
+# Without a feed the app skips update checks entirely (no network calls).
+# publish:
+#   provider: github
+#   owner: your-github-user
+#   repo: scanvas

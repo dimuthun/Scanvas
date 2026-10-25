@@ -1,0 +1,39 @@
+.savepath {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 14px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  backdrop-filter: blur(var(--blur)) saturate(1.4);
+  box-shadow: var(--shadow);
+  animation: rise-in 0.25s var(--ease);
+}
+
+.input-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-row input {
+  flex: 1;
+  min-width: 0;
+  padding-left: 32px !important;
+}
+
+.field-icon {
+  position: absolute;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.savepath .modal-actions {
+  margin-top: 4px;
+}

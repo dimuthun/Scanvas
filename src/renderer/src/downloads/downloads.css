@@ -1,0 +1,128 @@
+.jobs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  list-style: none;
+  overflow: auto;
+}
+
+.job {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  animation: rise-in 0.25s var(--ease) both;
+}
+
+.file-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.file-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.job-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.job-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.job .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.job .status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.state-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.state-icon.done {
+  color: var(--success);
+}
+
+.state-icon.failed {
+  color: var(--danger);
+}
+
+.state-icon.spinning {
+  color: var(--accent);
+  animation: spin 1s linear infinite;
+}
+
+.job .error {
+  margin: 6px 0 0;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+.bar {
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  transition: width 0.25s var(--ease);
+}
+
+.job.done .fill {
+  background: var(--success);
+}
+
+.job.failed .fill {
+  background: var(--danger);
+}
+
+.fill.indeterminate {
+  width: 30% !important;
+  animation: slide 1.2s ease-in-out infinite;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(340%);
+  }
+}
+
+.job-actions {
+  display: flex;
+  gap: 2px;
+}
