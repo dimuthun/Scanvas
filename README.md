@@ -12,6 +12,7 @@ Grab text from anywhere on screen, turn phone photos into clean printable pages,
 ![Electron](https://img.shields.io/badge/Electron-45-47848F)
 ![TypeScript](https://img.shields.io/badge/TypeScript-7-3178C6)
 ![Offline](https://img.shields.io/badge/OCR-100%25%20offline-15803d)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 </div>
 
@@ -30,6 +31,7 @@ Grab text from anywhere on screen, turn phone photos into clean printable pages,
 - [Privacy & security](#privacy--security)
 - [Troubleshooting](#troubleshooting)
 - [Acknowledgements](#acknowledgements)
+- [License](#license)
 
 ---
 
@@ -281,3 +283,11 @@ Scanvas is built on excellent open-source projects:
 - **App framework and UI:** [Electron](https://www.electronjs.org/), [electron-vite](https://electron-vite.org/), [React](https://react.dev/), [Lucide](https://lucide.dev/) icons and [Inter](https://rsms.me/inter/).
 
 The workflow was inspired by CamScanner's desktop app. Scanvas is an independent project and is not affiliated with CamScanner or INTSIG.
+
+---
+
+## License
+
+[MIT](LICENSE) © 2026 Dimuthu Nawarathna
+
+The bundled third-party components keep their own licenses: Tesseract.js and its language data (Apache-2.0), OpenCV (Apache-2.0), pdf.js (Apache-2.0), pdf-lib (MIT), docx (MIT), zxing-cpp/zxing-wasm (Apache-2.0/MIT), Electron (MIT), React (MIT), Lucide (ISC) and Inter (SIL OFL 1.1).
