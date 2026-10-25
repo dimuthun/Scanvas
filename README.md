@@ -14,12 +14,26 @@ Grab text from anywhere on screen, turn phone photos into clean printable pages,
 ![Offline](https://img.shields.io/badge/OCR-100%25%20offline-15803d)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
+<img src="docs/screenshots/library-light.png" width="860" alt="Scanvas library with folders, tags and scanned documents (Light theme)" />
+
 </div>
+
+## Screenshots
+
+| | |
+|---|---|
+| <img src="docs/screenshots/editor-ocean.png" alt="Document editor: a phone photo detected, straightened and cleaned up, with filters and recognized text (Ocean theme)" /> | <img src="docs/screenshots/result-forest.png" alt="OCR result window with the source image and editable recognized text (Forest theme)" /> |
+| **Editor**: a tilted phone photo of a page on a desk, automatically cropped, straightened and cleaned up. Filters, adjustments and the recognized text are on the right. | **OCR result**: the image and editable text side by side, with language choice, line joining, confidence and copy/save. |
+| <img src="docs/screenshots/library-midnight.png" alt="Library in the Midnight theme" /> | <img src="docs/screenshots/settings-sunset.png" alt="Settings with theme previews and accent colors (Sunset theme)" /> |
+| **Library** in the Midnight theme, with full-text search, folders and tags. Chinese text is recognized too. | **Appearance settings**: 8 themes with live previews, 10 accent colors and the glass effect switch. |
+
+*All screenshots use made-up sample documents.*
 
 ---
 
 ## Contents
 
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Install](#install)
 - [Using Scanvas](#using-scanvas)
@@ -117,14 +131,18 @@ Build from source with `npx electron-builder --mac` or `--linux` (DMG / AppImage
 All shortcuts can be changed in **Settings → Shortcuts**.
 
 ### Command line
-Scanvas runs as a single instance. Running it again with one of these arguments controls the instance that is already running, which is handy for shortcuts and scripts:
+Scanvas runs as a single instance. Running it again with one of these arguments controls the instance that is already running, which is handy for shortcuts, "Open with" and scripts:
 
 ```bash
-Scanvas.exe --capture            # start a screenshot-OCR selection
-Scanvas.exe --open=library       # also: settings | pdftools | downloads
-Scanvas.exe --doc=<document-id>  # open a document in the editor
-Scanvas.exe --hidden             # start in the tray only (used for "start at login")
+Scanvas.exe photo1.jpg photo2.jpg scan.pdf   # new scanned document from these files
+Scanvas.exe --ocr=C:\path\to\image.png       # recognize the text of an image
+Scanvas.exe --capture                        # start a screenshot-OCR selection
+Scanvas.exe --open=library                   # also: settings | pdftools | downloads
+Scanvas.exe --doc=<document-id>              # open a document in the editor
+Scanvas.exe --hidden                         # start in the tray only (used for "start at login")
 ```
+
+**Portable / separate profile:** set `SCANVAS_USER_DATA_DIR` to an absolute folder path to keep the library and settings there instead of `%APPDATA%\Scanvas`. This is useful for a USB-stick setup, for testing, or for making demo screenshots.
 
 ### Where data lives
 | What | Location (Windows) |

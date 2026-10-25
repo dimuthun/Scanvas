@@ -104,6 +104,15 @@ export async function createDocumentFromSource(source: PageSource, owner?: Brows
   return doc.id
 }
 
+/** "Open with Scanvas" / files on the command line: one new document from the given image and PDF files. */
+export async function createDocumentFromPaths(paths: string[]): Promise<string> {
+  const doc = library().createDocument(defaultTitle(paths, 'images'))
+  notifyLibraryChanged(doc.id)
+  openEditor(doc.id)
+  await runImport(doc.id, paths, 'images')
+  return doc.id
+}
+
 /** Pick input and append its pages to an existing document. Returns false when cancelled. */
 export async function addPagesFromSource(docId: string, source: PageSource, owner?: BrowserWindow): Promise<boolean> {
   const paths = await pickSource(source, owner)
